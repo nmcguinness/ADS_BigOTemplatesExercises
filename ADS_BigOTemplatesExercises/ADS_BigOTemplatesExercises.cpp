@@ -19,7 +19,6 @@ int main()
     cout << "BigO Exercises..." << endl;
     exercisesBigO();
 
-
     /*************************** Templates Exercises ***************************/
     cout << "Templates Exercises..." << endl;
     exercisesTemplates();
