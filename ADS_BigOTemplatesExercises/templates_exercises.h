@@ -19,3 +19,32 @@ void ads_print(list<E> list) {
 		cout << value << endl;
 	}
 }
+
+//templates - exercise 6
+template <typename T>
+int binarySearch(T* list, int size, T target)
+{
+	int min = 0, max = size - 1, mid = 0;
+	bool found = false;
+	while (!found && min <= max)
+	{
+		mid = (min + max) / 2; // (integer div!)
+		if (list[mid] == target)
+			found = true;
+		else if (target < list[mid])
+			max = mid - 1;
+		else min = mid + 1;
+	}
+	if (found) return mid;
+	else return -1;
+}
+
+//templates - exercise 6
+template <typename T>
+int linearSearch(T* list, int size, T target)
+{
+	for (int x = 0; x < size; x++)
+		if (list[x] == target) return x;
+
+	return -1;
+}
