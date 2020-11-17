@@ -15,15 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ADS_BigOTemplatesExercises.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="BigO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ADS_BigOTemplatesExercises.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ADS_Array.h">
@@ -32,5 +24,10 @@
     <ClInclude Include="templates_exercises.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

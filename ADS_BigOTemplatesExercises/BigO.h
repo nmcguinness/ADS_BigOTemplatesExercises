@@ -21,6 +21,10 @@ void printFirstItem(int arrayOfItems[]);
 void bubbleSort(int arr[], int size);
 void factorial(int i);
 
+/// @brief A template function to measure the time, in nanoseconds, that a function takes to execute
+/// @tparam FuncType A struct or class which implements the function call operator (i.e. is a functor)
+/// @param func A functor which calls the target method in the operator()(){} code
+/// @return Time in nanoseconds for the function called by the functor to execute
 template <typename FuncType>
 double measureTime(FuncType func)
 {
@@ -28,7 +32,6 @@ double measureTime(FuncType func)
 	func();
 	std::chrono::time_point<std::chrono::high_resolution_clock> end = std::chrono::high_resolution_clock::now();
 	return (end - st) / std::chrono::nanoseconds(1);
-
 }
 
 int binarySearch(int* list, int size, int target)
@@ -48,10 +51,10 @@ int binarySearch(int* list, int size, int target)
 	else return -1;
 }
 
-int linearSearch(int* list, int size, int value)
+int linearSearch(int* list, int size, int target)
 {
 	for (int x = 0; x < size; x++)
-		if (list[x] == value) return x;
+		if (list[x] == target) return x;
 
 	return -1;
 }
@@ -90,4 +93,31 @@ void factorial(int i)
 		factorial(i - 1);
 	else
 		return;
+}
+
+template <typename T>
+int binarySearch(T* list, int size, T target)
+{
+	int min = 0, max = size - 1, mid = 0;
+	bool found = false;
+	while (!found && min <= max)
+	{
+		mid = (min + max) / 2; // (integer div!)
+		if (list[mid] == target)
+			found = true;
+		else if (target < list[mid])
+			max = mid - 1;
+		else min = mid + 1;
+	}
+	if (found) return mid;
+	else return -1;
+}
+
+template <typename T>
+int linearSearch(T* list, int size, T target)
+{
+	for (int x = 0; x < size; x++)
+		if (list[x] == target) return x;
+
+	return -1;
 }

@@ -139,11 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ADS_BigOTemplatesExercises.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ADS_Array.h" />
-    <ClInclude Include="ADS_BigOTemplatesExercises.h" />
     <ClInclude Include="BigO.h" />
     <ClInclude Include="templates_exercises.h" />
   </ItemGroup>
