@@ -142,8 +142,10 @@
     <ClCompile Include="ADS_BigOTemplatesExercises.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ADS_Array.h" />
     <ClInclude Include="ADS_BigOTemplatesExercises.h" />
     <ClInclude Include="BigO.h" />
+    <ClInclude Include="templates_exercises.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

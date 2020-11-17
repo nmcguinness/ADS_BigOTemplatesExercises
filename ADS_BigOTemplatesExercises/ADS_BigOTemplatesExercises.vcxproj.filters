@@ -26,5 +26,11 @@
     <ClInclude Include="ADS_BigOTemplatesExercises.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ADS_Array.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="templates_exercises.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
