@@ -11,6 +11,7 @@
 #include "templates_exercises.h"
 #include "ADS_Array.h"
 #include "GenericPair.h"
+#include "GenericArray.h"
 
 using namespace std;
 
@@ -133,13 +134,13 @@ enum class ESubscriptionType {
 void doSomething() {
 	int x = static_cast<int>(Yearly);
 	EPaymentType pT1 = Daily;
-}
+};
 
 /// @brief Demo using a struct in our GenericPair
 struct Account {
 	string name;
 	double subscription;
-	ESubscriptionType subType;
+	ESubscriptionType subType; //warning on unintialized enum
 
 	//TODO - implement << and < and >= operators
 	friend ostream& operator<<(ostream& os, const Account& rhs) {
@@ -177,25 +178,50 @@ void templates_exercise4()
 }
 
 /// @brief Create a template Array class, which implements a dynamic array
+//void templates_exercise5()
+//{
+//	//an array of strings
+//	ADS_Array<string> arr1(5, "default value");
+//	arr1.print();
+//
+//	//an array of integers
+//	ADS_Array<int> arr2(5, -1);
+//
+//	//adding some values
+//	arr2.add(2, 0);
+//	arr2.add(4, 1);
+//	arr2.add(8, 2);
+//	arr2.add(16, 3);
+//	//arr2.add(32, 4); //leave the last element free to see how print deals with an uninitialized value
+//
+//	//calling the print
+//	arr2.print();
+//
+//	//accessing a value
+//	cout << arr2.get(3) << endl;
+//}
+
 void templates_exercise5()
 {
 	//an array of strings
-	ADS_Array<string> arr1(5, "default value");
-	arr1.print();
+	GenericArray<int> strArray(5, 999);
 
-	//an array of integers
-	ADS_Array<int> arr2(5, -1);
+	//try print
+	strArray.print();
 
-	//adding some values
-	arr2.add(2, 0);
-	arr2.add(4, 1);
-	arr2.add(8, 2);
-	arr2.add(16, 3);
-	//arr2.add(32, 4); //leave the last element free to see how print deals with an uninitialized value
+	//try get and SUCCEED
+	try {
+		cout << strArray.get(0);
+	}
+	catch (invalid_argument e) {
+		cerr << e.what() << endl;
+	}
 
-	//calling the print
-	arr2.print();
-
-	//accessing a value
-	cout << arr2.get(3) << endl;
+	//try get and FAIL
+	try {
+		cout << strArray.get(-10000);
+	}
+	catch (invalid_argument e) {
+		cerr << e.what() << endl;
+	}
 }
