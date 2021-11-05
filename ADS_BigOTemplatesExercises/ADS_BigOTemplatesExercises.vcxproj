@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="ADS_Array.h" />
     <ClInclude Include="BigO.h" />
+    <ClInclude Include="GenericPair.h" />
     <ClInclude Include="templates_exercises.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

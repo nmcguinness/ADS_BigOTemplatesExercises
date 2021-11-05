@@ -65,10 +65,11 @@ public:
 
 	Fruit(string name, double weight) : name(name), weight(weight) {};
 
-	int operator<(const Fruit& other) {
-		return (this->weight - other.weight < 0) ? true : false;
+	int operator<(const Fruit& other) const {
+		return (abs(this->weight - other.weight) < 0) ? true : false;
 	}
-	int operator>(const Fruit& other) {
+
+	int operator>(const Fruit& other) const {
 		//notice how we call < operator from this operator but invert (!) the result
 		return !(*this < other);
 	}

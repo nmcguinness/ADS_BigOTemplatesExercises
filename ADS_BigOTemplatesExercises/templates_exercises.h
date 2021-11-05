@@ -3,7 +3,7 @@
 //templates - exercise 1
 template <typename T>
 T ads_max(T x, T y) {
-	return x > y ? x : y;
+	return x > y ? x : y; //ternary operator (3 operands)
 }
 
 //templates - exercise 2
@@ -17,6 +17,14 @@ template <typename E>
 void ads_print(list<E> list) {
 	for (E value : list) {
 		cout << value << endl;
+	}
+}
+
+template <typename Iter>
+void ads_print(Iter iter, Iter end) {
+	while (iter != end) {
+		cout << *iter << endl;
+		iter++;
 	}
 }
 
