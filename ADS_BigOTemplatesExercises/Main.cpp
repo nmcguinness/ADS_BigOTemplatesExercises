@@ -10,6 +10,7 @@
 
 #include "templates_exercises.h"
 #include "ADS_Array.h"
+#include "GenericPair.h"
 
 using namespace std;
 
@@ -21,6 +22,7 @@ void exercisesTemplates();
 void templates_exercise1();
 void templates_exercise2();
 void templates_exercise3();
+void templates_exercise4();
 void templates_exercise5();
 
 int main()
@@ -52,6 +54,8 @@ void exercisesTemplates()
 	templates_exercise3();
 
 	//why dont you try solving exercise 4?
+	cout << endl << "templates_exercise4..." << endl;
+	templates_exercise4();
 
 	cout << endl << "templates_exercise5..." << endl;
 	templates_exercise5();
@@ -111,6 +115,34 @@ void templates_exercise3()
 	list<Fruit> fruitList = { f1, f2 };
 
 	ads_print(fruitList);
+}
+
+enum class ESubscriptionType {
+	Platinum, Gold, Silver
+};
+
+struct Account {
+	string name;
+	double subscription;
+	ESubscriptionType subType;
+
+	//TODO - implement << and < and >= operators
+};
+
+/// @brief Write a template
+void templates_exercise4()
+{
+	//simple demo
+	GenericPair<string, double> gp1("apple", 0.65);
+	cout << gp1 << endl;
+
+	//demo with struct and enum
+	Account acc1;
+	acc1.name = "Jane Bloggs";
+	acc1.subscription = 14.99;
+	acc1.subType = ESubscriptionType::Platinum;
+	GenericPair<int, Account> gp2(12345, acc1);
+	cout << gp2 << endl;
 }
 
 /// @brief Create a template Array class, which implements a dynamic array

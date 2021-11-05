@@ -1,19 +1,31 @@
 #pragma once
-class Pair
+#include <iostream>
+
+template <typename F, typename S>
+class GenericPair
 {
 private:
-	int first;
-	int second;
+	F first;
+	S second;
 
 public:
-	Pair(int first, int second) : first(first), second(second) {}
-	~Pair() {}
+	GenericPair(F first, S  second) : first(first), second(second) {}
+	~GenericPair() {}
 
-	friend std::ostream& operator<<(std::ostream& os, const Pair& other);
+	//remember that use of "friend" breaks encapsulation i.e. makes all fields public for this method
+	friend std::ostream& operator<<(std::ostream& os, const GenericPair& other)
+	{
+		os << other.first << "," << other.second;
+		return os;
+	}
 };
 
-std::ostream& operator<<(std::ostream& os, const Pair& other)
-{
-	os << other.first << "," << other.second;
-	return os;
-}
+//template <typename F, typename S>
+//std::ostream& operator<<(std::ostream& os, const GenericPair<F, S>& other);
+
+//template <typename F, typename S>
+//std::ostream& operator<<(std::ostream& os, const GenericPair<F, S>& other)
+//{
+//	os << other.first << "," << other.second;
+//	return os;
+//}
