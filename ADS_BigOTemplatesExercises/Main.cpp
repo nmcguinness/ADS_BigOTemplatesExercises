@@ -3,7 +3,7 @@
  * \brief  Selected solutions to the BigO and Templates exercises in Moodle
  *
  * \author NMCG
- * \date   November 2020
+ * \date   November 2021
  *********************************************************************/
 #include <iostream>
 #include "BigO.h"
