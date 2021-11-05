@@ -129,6 +129,13 @@ enum class ESubscriptionType {
 	Platinum, Gold, Silver
 };
 
+/// @brief Demo showing the use of an unscoped enum
+void doSomething() {
+	int x = static_cast<int>(Yearly);
+	EPaymentType pT1 = Daily;
+}
+
+/// @brief Demo using a struct in our GenericPair
 struct Account {
 	string name;
 	double subscription;
@@ -136,7 +143,20 @@ struct Account {
 
 	//TODO - implement << and < and >= operators
 	friend ostream& operator<<(ostream& os, const Account& rhs) {
+		os << rhs.name << ","
+			<< rhs.subscription << ","
+			<< static_cast<int>(rhs.subType);
+		//<< (int)rhs.subType;  //does NOT throw a catchable exception
 		return os;
+	}
+
+	bool operator >=(const Account& rhs) {
+		return this->subscription >= rhs.subscription
+			&& this->subType >= rhs.subType;
+	}
+
+	bool operator <(const Account& rhs) {
+		return !(*this >= rhs);
 	}
 };
 
@@ -151,7 +171,7 @@ void templates_exercise4()
 	Account acc1;
 	acc1.name = "Jane Bloggs";
 	acc1.subscription = 14.99;
-	acc1.subType = ESubscriptionType::Platinum;
+	acc1.subType = ESubscriptionType::Silver;
 	GenericPair<int, Account> gp2(12345, acc1);
 	cout << gp2 << endl;
 }
