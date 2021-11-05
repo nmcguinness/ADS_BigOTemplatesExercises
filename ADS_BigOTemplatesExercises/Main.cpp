@@ -117,6 +117,14 @@ void templates_exercise3()
 	ads_print(fruitList);
 }
 
+///@brief demo defining an unscoped enum (i.e. an enum where enumerators (e.g. Daily) are globally visible)
+///@see https://www.walletfox.com/course/darkercornerscpp_scopedenum.php
+enum EPaymentType {
+	Yearly, Monthly, Weekly, Daily
+};
+
+///@brief demo defining a scoped enum (i.e. an enum where enumerators (e.g. Gold) are not globally visible)
+///@see https://www.walletfox.com/course/darkercornerscpp_scopedenum.php
 enum class ESubscriptionType {
 	Platinum, Gold, Silver
 };
@@ -127,6 +135,9 @@ struct Account {
 	ESubscriptionType subType;
 
 	//TODO - implement << and < and >= operators
+	friend ostream& operator<<(ostream& os, const Account& rhs) {
+		return os;
+	}
 };
 
 /// @brief Write a template
