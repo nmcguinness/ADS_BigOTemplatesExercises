@@ -146,6 +146,7 @@
     <ClInclude Include="BigO.h" />
     <ClInclude Include="GenericArray.h" />
     <ClInclude Include="GenericPair.h" />
+    <ClInclude Include="SecureGenericArray.h" />
     <ClInclude Include="templates_exercises.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

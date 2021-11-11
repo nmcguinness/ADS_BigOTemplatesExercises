@@ -5,13 +5,11 @@ using namespace std;
 template <typename E>
 class GenericArray {
 private:
-
 	E* pArray;
 	E defaultValue;
 	int length;
 
 public:
-
 #pragma region Constructors, Initialization & Deletion
 	GenericArray(int length, E defaultValue) {
 		//TODO - check length is valid?
@@ -26,9 +24,6 @@ public:
 	}
 
 	~GenericArray() {
-		//"securely" delete contents
-		secureOverwrite(7);  //TODO - replace with static
-
 		//release allocated memory
 		delete[] pArray;
 
@@ -39,15 +34,6 @@ public:
 		pArray = nullptr;
 	}
 
-	void secureOverwrite(int repeat) {
-		srand(time(NULL));
-		for (int j = 0; j < repeat; j++) {
-			for (int i = 0; i < this->length; i++) {
-				pArray[i] = rand();  //BUG - when we make type T?
-			}
-		}
-	}
-
 	void initialize() {
 		for (int i = 0; i < this->length; i++) {
 			pArray[i] = defaultValue;
@@ -56,6 +42,7 @@ public:
 
 #pragma endregion
 
+#pragma region Core
 	void print() const {
 		for (int i = 0; i < this->length; i++) {
 			cout << pArray[i] << endl;
@@ -78,10 +65,26 @@ public:
 		//return this->defaultValue; //TODO - better to throw an exception
 	}
 
-	/*E get(int index);
-	bool add(E data, int index);
-	bool remove(int index);
+	bool add(E data, int index) {
+		if (index >= 0 && index < this->length) {
+			this->pData[index] = data;
+			return true;
+		}
+		return false;
+	}
+
+	bool remove(int index) {
+		if (index >= 0 && index < this->length) {
+			this->pData[index] = defaultValue; //[1,2,3,4,5] and remove(2) then [1,2,-1,4,5]
+			return true;
+		}
+		return false;
+	}
+
+	/*
 	bool push(E data);
 	void sort();
 	*/
+
+#pragma endregion
 };
