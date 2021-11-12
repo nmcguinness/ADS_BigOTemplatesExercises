@@ -28,7 +28,7 @@ namespace TestsADSBigOTemplateExercises
 			//assert based on result
 		}
 
-		TEST_METHOD(GenericLinearSearchForStuctPass)
+		TEST_METHOD(GenericLinearSearchForStructPass)
 		{
 		}
 
