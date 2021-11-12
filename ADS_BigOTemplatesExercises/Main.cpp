@@ -295,5 +295,6 @@ void demoSearchFunctorStrings() {
 	cout << "demoSearchFunctorStrings: " << index << endl;
 }
 
+/// EVEN BETTER THAN BEST??? To be continued...
 void demoSearchLambda() {
 }
