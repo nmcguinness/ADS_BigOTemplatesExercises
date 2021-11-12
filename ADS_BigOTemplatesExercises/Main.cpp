@@ -6,12 +6,14 @@
  * \date   November 2021
  *********************************************************************/
 #include <iostream>
+#include <list>
 #include "BigO.h"
 
 #include "templates_exercises.h"
 #include "ADS_Array.h"
 #include "GenericPair.h"
 #include "GenericArray.h"
+#include <functional>
 
 using namespace std;
 
@@ -26,6 +28,27 @@ void templates_exercise3();
 void templates_exercise4();
 void templates_exercise5();
 
+//functors
+bool isOdd(int value);
+bool isGreaterThan(int value);
+bool isInRangeAndMultipleOf(int value /*, int lo, int hi, int multiple*/);
+int searchGreaterThan(list<int> list, int floor);
+
+template<typename E>
+int search(list<E> list, bool (*pPredicate)(E));
+template<typename Iter, typename E>
+int search(Iter start, Iter end, bool (*pPredicate)(E));
+template<typename E>
+int search(list<E> list, function<bool(E)> predicate);
+template<typename Iter, typename E>
+int search(Iter start, Iter end, function<bool(E)> predicate);
+
+void demoSearchFunction();
+void demoSearchFunctionUsingPointer();
+void demoSearchFunctionUsingFunction();
+void demoSearchFunctor();
+void demoSearchLambda();
+
 int main()
 {
 	cout << "BigO Exercises..." << endl;
@@ -33,6 +56,13 @@ int main()
 
 	cout << "Templates Exercises..." << endl;
 	exercisesTemplates();
+
+	cout << "Functor Demos..." << endl;
+	demoSearchFunction();
+	demoSearchFunctionUsingPointer();
+	demoSearchFunctionUsingFunction();
+	demoSearchFunctor();
+	demoSearchLambda();
 }
 
 /*************************** BigO Exercises ***************************/
@@ -203,3 +233,124 @@ void templates_exercise5()
 }
 
 /*************************** Functors ***************************/
+
+bool isOdd(int value) {
+	return value % 2 == 1;
+}
+bool isGreaterThan(int value) {
+	return value > 1000;
+}
+
+//this predicate is really bad because it contains hard-coded values used in the predicate condition
+//is there a solution? yes - make a functor (or lambda function) instead - see class below
+bool isInRangeAndMultipleOf(int value /*, int lo, int hi, int multiple*/) {
+	return value > 50 && value < 200 && value % 7 == 0;
+}
+
+class IsInRangeAndMultipleOf {
+private:
+	int lo, hi, multiple;
+
+public:
+	IsInRangeAndMultipleOf(int lo, int hi, int multiple) : lo(lo), hi(hi), multiple(multiple) {};
+
+	bool operator()(int value) {
+		return (value > lo) && (value < hi) && (value % multiple == 0);
+	}
+};
+
+//Write one search function to rule them all!
+	//Remove the specific search predicate (i.e. a search function that returns true based on a condition)
+	//Pass a function as an argument
+	//Make a template version for not just ints!
+	//Remove the specific data structure and replace with iterators
+int searchGreaterThan(list<int> list, int floor) {
+	int index = 0;
+	for (int i : list) {
+		if (i > floor)
+			return index;
+		index++;
+	}
+	return -1;
+}
+
+template<typename E>
+int search(list<E> list, bool (*pPredicate)(E)) {
+	int index = 0;
+	for (int i : list) {
+		if (pPredicate(i))
+			return index;
+		index++;
+	}
+	return -1;
+}
+
+template<typename Iter, typename E>
+int search(Iter start, Iter end, bool (*pPredicate)(E)) {
+	int index = 0;
+	for (int i : list) {
+		if (pPredicate(i))
+			return index;
+		index++;
+	}
+	return -1;
+}
+
+template<typename E>
+int search(list<E> list, function<bool(E)> predicate) {
+	int index = 0;
+	for (int i : list) {
+		if (predicate(i))
+			return index;
+		index++;
+	}
+	return -1;
+}
+
+template<typename Iter, typename E>
+int search(Iter start, Iter end, function<bool(E)> predicate) {
+	int index = 0;
+	for (int i : list) {
+		if (predicate(i))
+			return index;
+		index++;
+	}
+	return -1;
+}
+
+void demoSearchFunction() {
+	list<int> populationList = { 234, 456, 1200, 1607, 210 };
+
+	int index = searchGreaterThan(populationList, 1000);
+	cout << "demoSearchFunction: " << index << endl;
+}
+
+void demoSearchFunctionUsingPointer() {
+	list<int> populationList = { 234, 456, 1200, 1607, 210 };
+
+	//make a pointer to a function - the syntax is difficult to read!
+	bool (*pFuncA)(int) = &isGreaterThan;
+	int index = search<int>(populationList, pFuncA);
+	cout << "demoSearchFunctionUsingPointer: " << index << endl;
+}
+
+void demoSearchFunctionUsingFunction() {
+	list<int> populationList = { 234, 456, 1200, 1607, 210 };
+
+	//replace the pointer to a function syntax with easier to read using function<>
+	function<bool(int)> pFuncB = isOdd;
+	int index = search<int>(populationList, pFuncB);
+	cout << "demoSearchFunctionUsingFunction: " << index << endl;
+}
+
+void demoSearchFunctor() {
+	list<int> populationList = { 234, 456, 1200, 1607, 210 };
+
+	//replace the pointer or function flavours above with a functor (i.e. an object that can store a predicate AND additional fields/values used by the predicate)
+	IsInRangeAndMultipleOf pred(400, 1000, 2);
+	int index = search<int>(populationList, pred);
+	cout << "demoSearchFunctor: " << index << endl;
+}
+
+void demoSearchLambda() {
+}

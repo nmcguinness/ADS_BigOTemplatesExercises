@@ -6,6 +6,18 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace TestsADSBigOTemplateExercises
 {
+	struct Student {
+		string name;
+		int age;
+
+		Student(string name, int age) : name(name), age(age) {};
+
+		//if we want to use search then we must implement whatever operators the search function use (e.g. >, <, ==,  !=)
+		bool operator==(const Student& rhs) {
+			return this->age == rhs.age; //simple age comparison
+		}
+	};
+
 	TEST_CLASS(SearchFunctionsTests)
 	{
 	public:
@@ -39,12 +51,28 @@ namespace TestsADSBigOTemplateExercises
 
 		TEST_METHOD(GenericLinearSearchForStructPass)
 		{
-			//TODO
+			//create an array of Students
+			Student myData[] = { Student("anna", 21), Student("bob", 34), Student("ciara", 26) };
+			int size = sizeof(myData) / sizeof(myData[0]);
+
+			//call the search for invalid value
+			int result = linearSearch<Student>(myData, size, Student("ciara", 26));
+
+			//assert based on result
+			Assert::AreEqual(result, 2);
 		}
 
 		TEST_METHOD(GenericLinearSearchForStructFail)
 		{
-			//TODO
+			//create an array of Students
+			Student myData[] = { Student("anna", 21), Student("bob", 34), Student("ciara", 26) };
+			int size = sizeof(myData) / sizeof(myData[0]);
+
+			//call the search for invalid value
+			int result = linearSearch<Student>(myData, size, Student("mark", 9999999));
+
+			//assert based on result
+			Assert::AreEqual(result, -1);
 		}
 	};
 }

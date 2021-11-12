@@ -10,7 +10,7 @@ namespace TestsADSBigOTemplateExercises
 	TEST_CLASS(GenericArrayTests)
 	{
 	public:
-		string userName = "jane"; //["","","","",""]
+		string userName = "jane";
 
 		TEST_METHOD(TestConstructor)
 		{

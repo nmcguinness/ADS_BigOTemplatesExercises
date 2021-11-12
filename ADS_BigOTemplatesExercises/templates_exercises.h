@@ -1,4 +1,7 @@
 #pragma once
+#include <list>
+
+using namespace std;
 
 //templates - exercise 1
 template <typename T>
