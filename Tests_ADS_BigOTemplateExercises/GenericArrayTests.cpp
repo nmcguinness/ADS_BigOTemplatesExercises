@@ -7,7 +7,7 @@ using namespace std;
 
 namespace TestsADSBigOTemplateExercises
 {
-	TEST_CLASS(TestsGenericArray)
+	TEST_CLASS(GenericArrayTests)
 	{
 	public:
 		string userName = "jane"; //["","","","",""]
@@ -25,30 +25,21 @@ namespace TestsADSBigOTemplateExercises
 		TEST_METHOD(TestSize)
 		{
 			//ask the user for input?
+			Assert::Fail(L"Not yet implemented");
 		}
 
 		TEST_METHOD(TestGetPass)  //0 <= index < length
 		{
-			//get(index)
+			//get(index
+			Assert::Fail(L"Not yet implemented");
 		}
 
 		TEST_METHOD(TestGetOutOfLimits)
 		{
 			//get(-1)
 			//get(length+1)
+			Assert::Fail(L"Not yet implemented");
 		}
-
-		//TEST_METHOD(TestConstructor)
-		//{
-		//	bool result = false;
-		//	Assert::AreEqual(result, false);
-
-		//	std::string x = "xyz";
-		//	std::string y = "xyz";
-		//	//tests for unique and distinct memory addresses
-		//	Assert::AreNotSame(x, y);
-		//	Assert::AreEqual(x, y);
-		//}
 	};
 }
 
