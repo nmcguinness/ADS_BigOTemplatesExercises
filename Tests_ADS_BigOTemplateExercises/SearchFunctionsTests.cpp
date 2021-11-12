@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "../ADS_BigOTemplatesExercises/templates_exercises.h"
+#include "../ADS_BigOTemplatesExercises/TemplateExercises.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

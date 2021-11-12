@@ -148,7 +148,7 @@
     <ClInclude Include="GenericArray.h" />
     <ClInclude Include="GenericPair.h" />
     <ClInclude Include="SecureGenericArray.h" />
-    <ClInclude Include="templates_exercises.h" />
+    <ClInclude Include="TemplateExercises.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

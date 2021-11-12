@@ -9,8 +9,7 @@
 #include <iostream>
 #include <list>
 #include "BigO.h"
-
-#include "templates_exercises.h"
+#include "TemplateExercises.h"
 #include "ADS_Array.h"
 #include "GenericPair.h"
 #include "GenericArray.h"
