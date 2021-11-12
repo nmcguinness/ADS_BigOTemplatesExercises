@@ -163,6 +163,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="GenericArrayTests.cpp" />
+    <ClCompile Include="SearchFunctionsTests.cpp" />
+    <ClCompile Include="SecureGenericArrayTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
