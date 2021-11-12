@@ -12,7 +12,8 @@ private:
 public:
 #pragma region Constructors, Initialization & Deletion
 	GenericArray(int length, E defaultValue) {
-		//TODO - check length is valid?
+		if (length <= 0)
+			throw std::invalid_argument("Index length - must be greater than zero!");
 
 		//set fields
 		this->pArray = new E[length];
@@ -58,7 +59,7 @@ public:
 	}
 
 	E get(int index) const {
-		if (index >= 0 && index <= this->length)
+		if (index >= 0 && index < this->length)
 			return this->pArray[index];
 		else
 			throw std::invalid_argument("Index is invalid!");
@@ -67,7 +68,7 @@ public:
 
 	bool add(E data, int index) {
 		if (index >= 0 && index < this->length) {
-			this->pData[index] = data;
+			this->pArray[index] = data;
 			return true;
 		}
 		return false;
@@ -75,7 +76,7 @@ public:
 
 	bool remove(int index) {
 		if (index >= 0 && index < this->length) {
-			this->pData[index] = defaultValue; //[1,2,3,4,5] and remove(2) then [1,2,-1,4,5]
+			this->pArray[index] = defaultValue; //[1,2,3,4,5] and remove(2) then [1,2,-1,4,5]
 			return true;
 		}
 		return false;

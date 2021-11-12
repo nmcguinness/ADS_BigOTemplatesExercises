@@ -22,23 +22,81 @@ namespace TestsADSBigOTemplateExercises
 			//Assert::IsNotNull(pArray);
 		}
 
-		TEST_METHOD(TestSize)
+		TEST_METHOD(TestSizePass)
 		{
-			//ask the user for input?
-			Assert::Fail(L"Not yet implemented");
+			GenericArray<string> strArray(5, "default");
+
+			Assert::AreEqual(strArray.size(), 5);
+		}
+
+		TEST_METHOD(TestSizeFail)
+		{
+			try
+			{
+				GenericArray<string> strArray(-1, "default");
+				Assert::Fail(L"Length was negative but no exception has been thrown!");
+			}
+			catch (invalid_argument e) {
+				cout << e.what() << endl;
+			}
+		}
+
+		TEST_METHOD(TestSizeLarge)
+		{
+			GenericArray<string> strArray(1E6, "default");
+			Assert::AreEqual(strArray.size(), 1000000);
 		}
 
 		TEST_METHOD(TestGetPass)  //0 <= index < length
 		{
-			//get(index
-			Assert::Fail(L"Not yet implemented");
+			GenericArray<string> strArray(5, "default");
+			strArray.add("alan", 0);
+			strArray.add("bob", 1);
+			strArray.add("ciara", 2);
+			strArray.add("david", 3);
+			//strArray.add("erica", 4);
+
+			string target = "alan";
+			Assert::AreEqual(strArray.get(0), target);  //(const char*, const char_t*)
+
+			target = "default";
+			Assert::AreEqual(strArray.get(4), target);  //(const char*, const char_t*)
 		}
 
-		TEST_METHOD(TestGetOutOfLimits)
+		TEST_METHOD(TestGetOutOfLimitsLow)
 		{
-			//get(-1)
-			//get(length+1)
-			Assert::Fail(L"Not yet implemented");
+			GenericArray<string> strArray(5, "default");
+			strArray.add("alan", 0);
+			strArray.add("bob", 1);
+			strArray.add("ciara", 2);
+			strArray.add("david", 3);
+			strArray.add("erica", 4);
+
+			try {
+				string s = strArray.get(-1);
+				Assert::Fail(L"Index was negative but no exception has been thrown!");
+			}
+			catch (invalid_argument e) {
+				cout << e.what() << endl;
+			}
+		}
+
+		TEST_METHOD(TestGetOutOfLimitsHigh)
+		{
+			GenericArray<string> strArray(5, "default");
+			strArray.add("alan", 0);
+			strArray.add("bob", 1);
+			strArray.add("ciara", 2);
+			strArray.add("david", 3);
+			strArray.add("erica", 4);
+
+			try {
+				string s = strArray.get(5);
+				Assert::Fail(L"Index was too large but no exception has been thrown!");
+			}
+			catch (invalid_argument e) {
+				cout << e.what() << endl;
+			}
 		}
 	};
 }
