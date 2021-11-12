@@ -201,3 +201,5 @@ void templates_exercise5()
 		cerr << e.what() << endl;
 	}
 }
+
+/*************************** Functors ***************************/

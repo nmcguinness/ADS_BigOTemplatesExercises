@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="ADS_Array.h" />
     <ClInclude Include="BigO.h" />
+    <ClInclude Include="Functors.h" />
     <ClInclude Include="GenericArray.h" />
     <ClInclude Include="GenericPair.h" />
     <ClInclude Include="SecureGenericArray.h" />

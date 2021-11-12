@@ -19,13 +19,3 @@ public:
 		return os;
 	}
 };
-
-//template <typename F, typename S>
-//std::ostream& operator<<(std::ostream& os, const GenericPair<F, S>& other);
-
-//template <typename F, typename S>
-//std::ostream& operator<<(std::ostream& os, const GenericPair<F, S>& other)
-//{
-//	os << other.first << "," << other.second;
-//	return os;
-//}

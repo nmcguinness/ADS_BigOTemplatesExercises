@@ -10,11 +10,6 @@ namespace TestsADSBigOTemplateExercises
 	{
 	public:
 
-		TEST_METHOD(AddTestPass)
-		{
-			int result = add<int>(3, 2);
-		}
-
 		TEST_METHOD(GenericLinearSearchForIntPass)
 		{
 			//create an array of ints
@@ -23,7 +18,7 @@ namespace TestsADSBigOTemplateExercises
 			int size = sizeof(myData) / sizeof(myData[0]);
 
 			//call the search
-			int result = linearSearch<int>(myData, size, 1);
+			int result = linearSearch<int>(myData, size, 1);  //TODO - why?
 
 			//assert based on result
 			Assert::AreEqual(result, 3);
@@ -44,10 +39,12 @@ namespace TestsADSBigOTemplateExercises
 
 		TEST_METHOD(GenericLinearSearchForStructPass)
 		{
+			//TODO
 		}
 
 		TEST_METHOD(GenericLinearSearchForStructFail)
 		{
+			//TODO
 		}
 	};
 }

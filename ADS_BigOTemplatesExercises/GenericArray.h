@@ -82,10 +82,5 @@ public:
 		return false;
 	}
 
-	/*
-	bool push(E data);
-	void sort();
-	*/
-
 #pragma endregion
 };
