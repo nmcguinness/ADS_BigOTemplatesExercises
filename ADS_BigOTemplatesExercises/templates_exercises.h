@@ -28,6 +28,11 @@ void ads_print(Iter iter, Iter end) {
 	}
 }
 
+template <typename T>
+T add(T x, T y) {
+	return x + y;
+}
+
 //templates - exercise 6
 template <typename T>
 int binarySearch(T* list, int size, T target)

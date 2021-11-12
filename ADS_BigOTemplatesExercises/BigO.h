@@ -59,37 +59,37 @@ int linearSearch(int* list, int size, int target)
 
 	return -1;
 }
-
-template <typename E>
-E binarySearch(E* list, int size, E target)
-{
-	int min = 0, max = size - 1, mid = 0;
-	bool found = false;
-
-	while (!found && min <= max)
-	{
-		mid = (min + max) / 2; // (integer div!)
-		if (list[mid] == target)
-			found = true;
-		else if (target < list[mid])
-			max = mid - 1;
-		else min = mid + 1;
-	}
-	if (found)
-		return mid;
-	else
-		return -1;
-}
-
-template <typename E>
-int linearSearch(E* list, int size, E target)
-{
-	for (int x = 0; x < size; x++)
-		if (list[x] == target)
-			return x;
-
-	return -1;
-}
+//
+//template <typename E>
+//E binarySearch(E* list, int size, E target)
+//{
+//	int min = 0, max = size - 1, mid = 0;
+//	bool found = false;
+//
+//	while (!found && min <= max)
+//	{
+//		mid = (min + max) / 2; // (integer div!)
+//		if (list[mid] == target)
+//			found = true;
+//		else if (target < list[mid])
+//			max = mid - 1;
+//		else min = mid + 1;
+//	}
+//	if (found)
+//		return mid;
+//	else
+//		return -1;
+//}
+//
+//template <typename E>
+//int linearSearch(E* list, int size, E target)
+//{
+//	for (int x = 0; x < size; x++)
+//		if (list[x] == target)
+//			return x;
+//
+//	return -1;
+//}
 
 #pragma endregion
 
