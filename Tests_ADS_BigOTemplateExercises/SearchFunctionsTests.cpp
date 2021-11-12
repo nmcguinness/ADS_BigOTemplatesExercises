@@ -49,6 +49,33 @@ namespace TestsADSBigOTemplateExercises
 			Assert::AreEqual(result, -1);
 		}
 
+		TEST_METHOD(GenericBinarySearchForIntPass)
+		{
+			//create an array of ints
+			int myData[] = { 2,5,6,1,8,9,21 };
+			//int* pData = myData; //a pointer to array
+			int size = sizeof(myData) / sizeof(myData[0]);
+
+			//call the search
+			int result = binarySearch<int>(myData, size, 1);  //TODO - why?
+
+			//assert based on result
+			Assert::AreEqual(result, 3);
+		}
+
+		TEST_METHOD(GenericBinarySearchForIntFail)
+		{
+			//create an array of ints
+			int myData[] = { 2,5,6,1,8,9,21 };
+			int size = sizeof(myData) / sizeof(myData[0]);
+
+			//call the search for invalid value
+			int result = binarySearch<int>(myData, size, -100000);
+
+			//assert based on result
+			Assert::AreEqual(result, -1);
+		}
+
 		TEST_METHOD(GenericLinearSearchForStructPass)
 		{
 			//create an array of Students

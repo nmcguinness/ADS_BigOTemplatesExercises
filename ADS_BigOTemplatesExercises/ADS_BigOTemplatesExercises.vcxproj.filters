@@ -33,7 +33,7 @@
     <ClInclude Include="SecureGenericArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Functors.h">
+    <ClInclude Include="AdvancedConcepts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

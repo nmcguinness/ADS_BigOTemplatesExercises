@@ -1,6 +1,9 @@
 #pragma once
 #include <iostream>
 
+/// @brief A class to pair (or create a tuple with) two data types
+/// @tparam F First data type
+/// @tparam S Second data type
 template <typename F, typename S>
 class GenericPair
 {

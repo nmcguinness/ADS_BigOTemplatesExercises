@@ -1,6 +1,7 @@
 /*****************************************************************//**
  * \file   ADS_BigOTemplatesExercises.cpp
  * \brief  Selected solutions to the BigO and Templates exercises in Moodle
+ *         also includes unit tests, secure delete, and functor, function pointer, and lambda demos
  *
  * \author NMCG
  * \date   November 2021
@@ -13,7 +14,7 @@
 #include "ADS_Array.h"
 #include "GenericPair.h"
 #include "GenericArray.h"
-#include <functional>
+#include "AdvancedConcepts.h"
 
 using namespace std;
 
@@ -29,39 +30,39 @@ void templates_exercise4();
 void templates_exercise5();
 
 //functors
-bool isOdd(int value);
-bool isGreaterThan(int value);
-bool isInRangeAndMultipleOf(int value /*, int lo, int hi, int multiple*/);
-int searchGreaterThan(list<int> list, int floor);
-
-template<typename E>
-int search(list<E> list, bool (*pPredicate)(E));
-template<typename Iter, typename E>
-int search(Iter start, Iter end, bool (*pPredicate)(E));
-template<typename E>
-int search(list<E> list, function<bool(E)> predicate);
-template<typename Iter, typename E>
-int search(Iter start, Iter end, function<bool(E)> predicate);
-
 void demoSearchFunction();
 void demoSearchFunctionUsingPointer();
 void demoSearchFunctionUsingFunction();
-void demoSearchFunctor();
+void demoSearchFunctorInts();
+void demoSearchFunctorStrings();
 void demoSearchLambda();
 
 int main()
 {
-	cout << "BigO Exercises..." << endl;
+	cout << endl << "BigO Exercises..." << endl;
 	exercisesBigO();
+	cout << endl;
 
-	cout << "Templates Exercises..." << endl;
+	cout << endl << "Templates Exercises..." << endl;
 	exercisesTemplates();
+	cout << endl;
 
-	cout << "Functor Demos..." << endl;
+	cout << endl << "Functor Demos..." << endl;
 	demoSearchFunction();
+	cout << endl;
+
 	demoSearchFunctionUsingPointer();
+	cout << endl;
+
 	demoSearchFunctionUsingFunction();
-	demoSearchFunctor();
+	cout << endl;
+
+	demoSearchFunctorInts();
+	cout << endl;
+
+	demoSearchFunctorStrings();
+	cout << endl;
+
 	demoSearchLambda();
 }
 
@@ -210,14 +211,14 @@ void templates_exercise4()
 void templates_exercise5()
 {
 	//an array of ints
-	GenericArray<int> intArray(5, -1);
+	GenericArray<int> intArray(5, 2021); //default = 2021
 
 	//try print
 	intArray.print();
 
 	//try get and SUCCEED
 	try {
-		cout << intArray.get(0);
+		cout << intArray.get(0) << endl;
 	}
 	catch (invalid_argument e) {
 		cerr << e.what() << endl;
@@ -232,92 +233,14 @@ void templates_exercise5()
 	}
 }
 
-/*************************** Functors ***************************/
+/*************************** Function Pointers, Functors & Lambdas  ***************************/
 
-bool isOdd(int value) {
-	return value % 2 == 1;
-}
-bool isGreaterThan(int value) {
-	return value > 1000;
-}
-
-//this predicate is really bad because it contains hard-coded values used in the predicate condition
-//is there a solution? yes - make a functor (or lambda function) instead - see class below
-bool isInRangeAndMultipleOf(int value /*, int lo, int hi, int multiple*/) {
-	return value > 50 && value < 200 && value % 7 == 0;
-}
-
-class IsInRangeAndMultipleOf {
-private:
-	int lo, hi, multiple;
-
-public:
-	IsInRangeAndMultipleOf(int lo, int hi, int multiple) : lo(lo), hi(hi), multiple(multiple) {};
-
-	bool operator()(int value) {
-		return (value > lo) && (value < hi) && (value % multiple == 0);
-	}
-};
-
-//Write one search function to rule them all!
-	//Remove the specific search predicate (i.e. a search function that returns true based on a condition)
-	//Pass a function as an argument
-	//Make a template version for not just ints!
-	//Remove the specific data structure and replace with iterators
-int searchGreaterThan(list<int> list, int floor) {
-	int index = 0;
-	for (int i : list) {
-		if (i > floor)
-			return index;
-		index++;
-	}
-	return -1;
-}
-
-template<typename E>
-int search(list<E> list, bool (*pPredicate)(E)) {
-	int index = 0;
-	for (int i : list) {
-		if (pPredicate(i))
-			return index;
-		index++;
-	}
-	return -1;
-}
-
-template<typename Iter, typename E>
-int search(Iter start, Iter end, bool (*pPredicate)(E)) {
-	int index = 0;
-	for (int i : list) {
-		if (pPredicate(i))
-			return index;
-		index++;
-	}
-	return -1;
-}
-
-template<typename E>
-int search(list<E> list, function<bool(E)> predicate) {
-	int index = 0;
-	for (int i : list) {
-		if (predicate(i))
-			return index;
-		index++;
-	}
-	return -1;
-}
-
-template<typename Iter, typename E>
-int search(Iter start, Iter end, function<bool(E)> predicate) {
-	int index = 0;
-	for (int i : list) {
-		if (predicate(i))
-			return index;
-		index++;
-	}
-	return -1;
-}
-
+//BAD
+/// @brief Demos a search method that is sub-optimal in its implementation because it...
+/// 1. A very specific search
+/// 2. Only searches through a list
+/// 3. Only searches through ints
+/// Surely there must be a better way!? :(
 void demoSearchFunction() {
 	list<int> populationList = { 234, 456, 1200, 1607, 210 };
 
@@ -325,6 +248,10 @@ void demoSearchFunction() {
 	cout << "demoSearchFunction: " << index << endl;
 }
 
+//BETTER
+/// @brief Demos a search method that is sub-optimal in its implementation because it...
+/// 1. Only searches through a list with a predicate (isGreaterThan) that has a built in value of 1000
+/// Surely there must be a better way!? :(
 void demoSearchFunctionUsingPointer() {
 	list<int> populationList = { 234, 456, 1200, 1607, 210 };
 
@@ -334,6 +261,10 @@ void demoSearchFunctionUsingPointer() {
 	cout << "demoSearchFunctionUsingPointer: " << index << endl;
 }
 
+//EVEN BETTER
+/// @brief Demos a search method that is sub-optimal in its implementation because it...
+/// 1. Only searches through a list with a predicate (isOdd) that cannot have additional search criteria included (e.g. odd and multiples of 5)
+/// Surely there must be a better way!? :(
 void demoSearchFunctionUsingFunction() {
 	list<int> populationList = { 234, 456, 1200, 1607, 210 };
 
@@ -343,13 +274,26 @@ void demoSearchFunctionUsingFunction() {
 	cout << "demoSearchFunctionUsingFunction: " << index << endl;
 }
 
-void demoSearchFunctor() {
+//BEST
+/// @brief Demos a search method that is the best solution thus far because it...
+/// 1. Uses a predicate (see operator() in IsInRangeAndMultipleOf) and a class (IsInRangeAndMultipleOf) that allows me to add additional search criteria for use by the predicate
+void demoSearchFunctorInts() {
 	list<int> populationList = { 234, 456, 1200, 1607, 210 };
 
 	//replace the pointer or function flavours above with a functor (i.e. an object that can store a predicate AND additional fields/values used by the predicate)
-	IsInRangeAndMultipleOf pred(400, 1000, 2);
-	int index = search<int>(populationList, pred);
-	cout << "demoSearchFunctor: " << index << endl;
+	//notice how we are now able to write a predicate with additional data (lo, hi, multiple) and package the predicate in a functor
+	IsInRangeAndMultipleOf predicate(400, 1000, 2);
+	int index = search<int>(populationList, predicate);
+	cout << "demoSearchFunctorInts: " << index << endl;
+}
+
+void demoSearchFunctorStrings() {
+	list<string> passwordList = { "1", "abcdef", "ASg33SD2fws", "nonumbers", "tooshort" };
+
+	//find the first password string with correct length (10,32) and alphanumeric
+	StringConstraints predicate("^[a-zA-Z0-9]+$", 10, 32);
+	int index = search<string>(passwordList, predicate);
+	cout << "demoSearchFunctorStrings: " << index << endl;
 }
 
 void demoSearchLambda() {

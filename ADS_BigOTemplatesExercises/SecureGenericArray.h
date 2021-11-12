@@ -1,6 +1,9 @@
 #pragma once
 #include "GenericArray.h"
 
+/// @brief A "secure" version of the GenericArray that performs an overwrite of data in the desctructor
+/// @tparam E
+/// This is outside the scope of your examples and only included for the interested reader.
 template <typename E>
 class SecureGenericArray : public GenericArray<E>
 {

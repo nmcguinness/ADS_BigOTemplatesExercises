@@ -11,6 +11,8 @@ namespace TestsADSBigOTemplateExercises
 
 		TEST_METHOD(TestMethod1)
 		{
+			//TODO - add tests here for the SecureGenericArray
+			//This is outside the scope of your examples and only included for the interested reader.
 		}
 	};
 }
